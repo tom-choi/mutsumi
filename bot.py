@@ -21,7 +21,7 @@ from discord.ext import commands, tasks
 from discord.ext.commands import Context
 from dotenv import load_dotenv
 
-from database import DatabaseManager
+# from database import DatabaseManager
 
 load_dotenv()
 
@@ -194,14 +194,14 @@ class DiscordBot(commands.Bot):
             f"Running on: {platform.system()} {platform.release()} ({os.name})"
         )
         self.logger.info("-------------------")
-        await self.init_db()
+        # await self.init_db()
         await self.load_cogs()
         self.status_task.start()
-        self.database = DatabaseManager(
-            connection=await aiosqlite.connect(
-                f"{os.path.realpath(os.path.dirname(__file__))}/database/database.db"
-            )
-        )
+        # self.database = DatabaseManager(
+        #     connection=await aiosqlite.connect(
+        #         f"{os.path.realpath(os.path.dirname(__file__))}/database/database.db"
+        #     )
+        # )
 
     async def on_message(self, message: discord.Message) -> None:
         """
