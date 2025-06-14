@@ -18,10 +18,10 @@ class Template(commands.Cog, name="template"):
     # Here you can just add your own commands, you'll always need to provide "self" as first parameter.
 
     @commands.hybrid_command(
-        name="testcommand",
-        description="This is a testing command that does nothing.",
+        name="lol",
+        description="笑點解析",
     )
-    async def testcommand(self, context: Context) -> None:
+    async def lolcommand(self, context: Context) -> None:
         """
         This is a testing command that does nothing.
 

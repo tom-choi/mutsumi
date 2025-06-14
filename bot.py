@@ -6,6 +6,7 @@ Description:
 Version: 6.3.0
 """
 
+import datetime
 import json
 import logging
 import os
@@ -15,11 +16,12 @@ import sys
 
 import aiosqlite
 import discord
+from discord import app_commands
 from discord.ext import commands, tasks
 from discord.ext.commands import Context
 from dotenv import load_dotenv
 
-from database import DatabaseManager
+# from database import DatabaseManager
 
 load_dotenv()
 
@@ -57,6 +59,7 @@ intents.presences = True
 """
 
 intents = discord.Intents.default()
+intents.message_content = True
 
 """
 Uncomment this if you want to use prefix (normal) commands.
@@ -194,11 +197,11 @@ class DiscordBot(commands.Bot):
         await self.init_db()
         await self.load_cogs()
         self.status_task.start()
-        self.database = DatabaseManager(
-            connection=await aiosqlite.connect(
-                f"{os.path.realpath(os.path.dirname(__file__))}/database/database.db"
-            )
-        )
+        # self.database = DatabaseManager(
+        #     connection=await aiosqlite.connect(
+        #         f"{os.path.realpath(os.path.dirname(__file__))}/database/database.db"
+        #     )
+        # )
 
     async def on_message(self, message: discord.Message) -> None:
         """
@@ -283,7 +286,6 @@ class DiscordBot(commands.Bot):
             await context.send(embed=embed)
         else:
             raise error
-
 
 bot = DiscordBot()
 bot.run(os.getenv("TOKEN"))
